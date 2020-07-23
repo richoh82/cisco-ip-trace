@@ -1,8 +1,8 @@
 ## Cisco IP Trace
 
-This Python script will take allow you to enter a single IP or CIDR network range and trace the associated MAC address(es) from a core Cisco router/switch to the edge switch port. It will output the target IP address, MAC address, edge switch name, port name, port description, interface mode (access or trunk), VLAN(s) allowed on port, and the number of MAC addresses currently learned on the edge port. By default the script will output this information to the console, but you can optionally output to CSV.
+This Python script will take allow you to enter a single IP or CIDR network range and trace the associated MAC address(es) from a core Cisco router/switch to the edge switch port. It will output the target IP address, DNS name, MAC address, edge switch name, edge switch IP, port name, port description, interface type (access or trunk), native or access vlan number, and the number of MAC addresses currently learned on the edge port. By default the script will output this information to the console, but you can optionally output to CSV.
 
-Please note that this script is only designed to run on Cisco IOS and NX-OS devices.
+Please note that this script is only designed to run on Cisco IOS, IOS XR, and NX-OS devices.
 
 ### Usage
 
@@ -27,10 +27,9 @@ If no parameters are provided, the script will run with interactive prompts:
 ```
 Enter target in CIDR notation (192.168.10.0/24): 192.168.10.0/24
 Enter VRF for the IP. Press 'Enter' if you're not using VRFs: myvrf
-Enter the IP address of the core router/switch that can ARP for the IP address to trace: 192.168.10.1
+Enter the Default Gateway of target ip: 192.168.10.1
 Username: admin
 Password: *****
-Enable password (leave blank if not needed):
 Enter a filename to save output as CSV (leave blank for no file output): myfile.csv
 ```
 
@@ -39,15 +38,23 @@ The script will then use a series of show commands and regexes against the show 
 ```
 Tracing 192.168.10.10...complete!
 
-Device IP,MAC Address,Switch,Port,Port Description,Interface Type,VLANs on port,Port MAC count
-192.168.10.10,0123.4567.6d36,SwitchB,Gi1/0/2,My Description,access,"1",1
+['Device IP: 192.168.10.10',
+ 'Reverse DNS Name: N/A',
+ 'MAC Address: 0123.4567.6d36',
+ 'Switch: SwitchB',
+ 'Switch IP: 192.168.1.1',
+ 'Port: Gi1/0/2',
+ 'Port Description: My Description',
+ 'Interface Type: access',
+ 'Native or Access Vlan: 1',
+ 'Port MAC count: 1']
 ```
 
 ### Requirements
 
 -Python3.x
 
--Python modules 'netmiko', 'ipcalc', and 'argparse'
+-Python modules 'netmiko', 'ipcalc', 'argparse', 'readline', and 'pprint'
 
 -SSH access to all Cisco devices from the computer running the script
 
@@ -58,10 +65,6 @@ Device IP,MAC Address,Switch,Port,Port Description,Interface Type,VLANs on port,
 -The "core" device that will be ARPing for the IP in question must have layer 2 connectivity to the LAN on which the target device is connected or the CDP neighbor discovery process will fail
 
 ### Known issues/to-do
-
--Add prompt for new creds if supplied creds fail on a discovered neighbor
-
--Add support for Cisco Nexus switches with port-channels (just need to work out the command syntax difference)
 
 -LLDP support
 
