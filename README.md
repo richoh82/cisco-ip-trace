@@ -64,8 +64,12 @@ Tracing 192.168.10.10...complete!
 
 -The "core" device that will be ARPing for the IP in question must have layer 2 connectivity to the LAN on which the target device is connected or the CDP neighbor discovery process will fail
 
-### Known issues/to-do
+### Known issues
 
--LLDP support
+cisco_ip_trace.py does not work on:
+
+-BVI interfaces in cisco_xr devices
+-Works somewhat if target IP is a network device
+-If VRF is used, then don't use core switch default gateway IP but instead any other core switch IP that's in the Global Routing table.
 
 ##### I appreciate any and all feedback.
