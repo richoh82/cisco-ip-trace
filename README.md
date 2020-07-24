@@ -2,7 +2,7 @@
 
 This Python script will allow you to enter a single IP or CIDR network range and trace the associated MAC address(es) from a core Cisco router/switch to the edge switch port. It will output the target IP address, DNS name, MAC address, edge switch name, edge switch IP, port name, port description, interface type (access or trunk), native or access vlan number, and the number of MAC addresses currently learned on the edge port. By default the script will output this information to the console, but you can optionally output to CSV.
 
-Please note that this script is only designed to run on Cisco IOS, IOS XR, and NX-OS devices.
+Please note that this script is only designed to run on Cisco IOS/XE, IOS XR, and NX-OS devices.
 
 ### Usage
 
