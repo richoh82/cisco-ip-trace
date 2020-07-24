@@ -68,8 +68,8 @@ Tracing 192.168.10.10...complete!
 
 cisco_ip_trace.py does not work on:
 
--BVI interfaces in cisco_xr devices
--Works somewhat if target IP is a network device
--If VRF is used, then don't use core switch default gateway IP but instead any other core switch IP that's in the Global Routing table.
+- BVI interfaces in cisco_xr devices
+- Works somewhat if target IP is a network device
+- If VRF is used, then don't use core switch default gateway IP but instead any other core switch IP that's in the Global Routing table.
 
 ##### I appreciate any and all feedback.
